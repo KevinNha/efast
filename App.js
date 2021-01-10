@@ -19,6 +19,7 @@ import Loader from './src/components/Loader';
 import { StoreProvider } from './src/context/store';
 
 import firebase from './src/firebase/config';
+import ChannelNav from './src/container/ChannelNav';
 
 // import {
 //   // Chat,
@@ -66,34 +67,19 @@ export default function App() {
     <StoreProvider>
     <View style={styles.container}>
       <NavigationContainer>
-        {!isLoggedIn ? (
+        {/* {!isLoggedIn ? ( */}
           <Stack.Navigator
             initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Dashboard" component={Dashboard} />
+            {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
+            <Stack.Screen name="Dashboard" component={ChannelNav} />
             <Stack.Screen name="Chat" component={Chat} />
           </Stack.Navigator>
-        ) : (
-          <Stack.Navigator
-            initialRouteName="Splash">
-            <Stack.Screen name="Splash" component={Splash} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="SignUp" component={SignUp} />
-            <Stack.Screen name="Dashboard" component={Dashboard} />
-            <Stack.Screen name="Chat" component={Chat} />
-          </Stack.Navigator>
-        //   <View style={styles.container}>
-        //   <Drawer.Navigator
-        //     // drawerContent={ChannelListDrawer}
-        //     drawerStyle={styles.drawerNavigator}>
-        //     {/* <Drawer.Screen name="ChannelScreen" component={ChannelScreen} /> */}
-        //     <Drawer.Screen name="Dashboard" component={Dashboard} />
-        //     <Drawer.Screen name="Chat" component={Chat} />
-        //   </Drawer.Navigator>
-        // </View>
-        )}
+        {/* ) : (
+
+        )} */}
       </NavigationContainer>
       {/* <Text>Open up App.js to start working on your app!</Text> */}
       {/* <StatusBar style="auto" /> */}
