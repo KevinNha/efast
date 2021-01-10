@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Text, Image, StyleSheet, YellowBox } from 'react-native';
 
 import iconProfile from '../../assets/profile.png'
 
@@ -16,11 +16,11 @@ function ChannelHeader({ navigation, channel, client }) {
   if (channel && memberIds.length === 2) {
     const otherUserId = (memberIds[0] === client.user.id ? memberIds[1] : memberIds[0]);
 
-    channelTitle = channel.state.members[otherUserId].user.name;
+    channelTitle = "";
   }
 
   return (
-    <View stlye={styles.container}>
+    <View style={styles.container}>
       <View style={styles.leftContent}>
         <TouchableOpacity
           onPress={() => {
@@ -28,10 +28,10 @@ function ChannelHeader({ navigation, channel, client }) {
           }}>
           <Text style={styles.hamburgerIcon}>☰</Text>    
         </TouchableOpacity>
-        <Text style={styles.channelTitle}>{ channelTitle } </Text>
+        <Text style={styles.channelTitle}> { channelTitle } </Text>
       </View>
 
-      <View style={styles.rightCotent}>
+      <View style={styles.rightContent}>
         <TouchableOpacity style={styles.profileIconContainer}>
           <Image source= { iconProfile } style={styles.profileIcon} />
         </TouchableOpacity>
@@ -40,17 +40,19 @@ function ChannelHeader({ navigation, channel, client }) {
   )
 }
 
+
 export const styles = StyleSheet.create({
   container: {
+    width: '100%',
     padding: 15,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: 'yellow',
     justifyContent: 'space-between',
     borderBottomWidth: 0.5,
     borderBottomColor: 'grey',
   },
   leftContent: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   hamburgerIcon: {
     fontSize: 27,
@@ -65,7 +67,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginRight: 10,
   },
-  profileIconContainer: {marginRight: 15, alignSelf: 'center'},
+  profileIconContainer: {alignSelf: 'center'},
   profileIcon: {
     height: 18,
     width: 18,

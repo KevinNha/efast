@@ -19,6 +19,7 @@ function ChannelScreen({navigation, route}) {
         <ChannelHeader
           navigation={navigation}
           channel={channel}
+          client={null}
         />
       </Text>
     </SafeAreaView>
@@ -27,14 +28,9 @@ function ChannelScreen({navigation, route}) {
 
 
 const styles = StyleSheet.create({
-  channelText: {
-    paddingTop: 30,
-    paddingLeft: 30
-  },
   channelScreenSaveAreaView: {
     backgroundColor: 'white',
     paddingTop: Platform.OS === 'android' ? 30 : 0,
-    paddingLeft: Platform.OS === 'android' ? 10 : 0
   },
   channelScreenContainer: {flexDirection: 'column', height: '100%'}
 })

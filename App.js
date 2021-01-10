@@ -1,12 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
 
-import ChannelScreen from './src/components/ChannelScreen';
 import ChannelListDrawer from './src/components/ChannelListDrawer';
+import ChannelHeader from './src/components/ChannelHeader'
+
+
+function ChannelScreen({navigation, route}) {
+  const [channel, setChannel] = useState(null);
+  useEffect(() => {
+    if (!channel) {
+      navigation.openDrawer();
+    }
+    const channelId = route.params ? route.params.channelId : null;
+    
+  }, [route.params]);
+
+  return (
+    <SafeAreaView style={styles.channelScreenSaveAreaView}>
+      <Text style={styles.channelScreenContainer}>
+        <ChannelHeader
+          navigation={navigation}
+          channel={channel}
+          client={null}
+        />
+      </Text>
+    </SafeAreaView>
+  )
+}
+
 
 const Drawer = createDrawerNavigator();
 
@@ -43,4 +68,9 @@ const styles = StyleSheet.create({
     width: 350,
     color: 'white',
   },
-});
+  channelScreenSaveAreaView: {
+    backgroundColor: 'white',
+    paddingTop: Platform.OS === 'android' ? 30 : 0,
+  },
+  channelScreenContainer: {flexDirection: 'column', height: '100%'}
+})
