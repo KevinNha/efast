@@ -4,6 +4,7 @@ import { FlatList, TextInput } from 'react-native-gesture-handler';
 import ChatBubble from '../components/ChatBubble';
 import firebase from '../firebase/config';
 import 'firebase/firestore';
+import { SendMessage } from '../network';
 
 export default function Chat({route, navigation}) {
     const {params} = route;
@@ -31,6 +32,7 @@ export default function Chat({route, navigation}) {
                             if (m) {
                                 msgs.push({
                                     senderId: m.senderId,
+                                    senderName: m.senderName,
                                     msg: m.msg,
                                 })
                             }
@@ -45,26 +47,30 @@ export default function Chat({route, navigation}) {
     }, [])
 
     const handleOnSend = () => {
-        
+        if (msgText) {
+            SendMessage(msgText, currentUserId, cid)
+        }
+        setMsgText("");
     }
 
     return (
         <SafeAreaView>
             <FlatList
                 inverted
-                data={[1, 2, 3]}
+                data={allMessages}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({item}) => (
-                    // <ChatBubble
-                    //     uid={senderId}
-                    //     msg={item.msg}
-                    // />
-                    <Text>{item}</Text>
+                    <ChatBubble
+                        uid={item.senderId}
+                        uname={item.senderName}
+                        msg={item.msg}
+                    />
+                    // <Text>{item}</Text>
                 )}
             />
 
             <View>
-                <TextInput placeholder="Type Here" numberOfLines={10} onChangeText={(text) => setMsgText(text)} />
+                <TextInput value={msgText} placeholder="Type Here" numberOfLines={10} onChangeText={(text) => setMsgText(text)} />
                 <View>
                     <Button title="Send" onPress={() => handleOnSend()} />
                 </View>
