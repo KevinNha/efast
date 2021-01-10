@@ -1,14 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import { StyleSheet, Text, View } from 'react-native';
-import 'react-native-gesture-handler';
-import { createStackNavigator } from '@react-navigation/stack';
-import ChannelScreen from './components/ChannelScreen';
-// import ChatScreen from './components/Chat/ChannelScreen';
-import ChannelListDrawer from './components/ChannelListDrawer';
+import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
+
+import ChannelListDrawer from './src/components/ChannelListDrawer';
+import ChannelHeader from './src/components/ChannelHeader'
+
+
+function ChannelScreen({navigation, route}) {
+  const [channel, setChannel] = useState(null);
+  useEffect(() => {
+    if (!channel) {
+      navigation.openDrawer();
+    }
+    const channelId = route.params ? route.params.channelId : null;
+    
+  }, [route.params]);
+
+  return (
+    <SafeAreaView style={styles.channelScreenSaveAreaView}>
+      <Text style={styles.channelScreenContainer}>
+        <ChannelHeader
+          navigation={navigation}
+          channel={channel}
+          client={null}
+        />
+      </Text>
+    </SafeAreaView>
+  )
+}
+
 
 const Drawer = createDrawerNavigator();
 
@@ -16,7 +39,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <View style={styles.container}>
+        <View style={styles.drawerContainer}>
           <Drawer.Navigator
             drawerContent={ChannelListDrawer}
             drawerStyle={styles.drawerNavigator}>
@@ -41,6 +64,9 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
+  drawerContainer: {
+    flex: 1,
+  },
   drawerNavigator: {
     backgroundColor: 'black',
     width: 350,
@@ -48,6 +74,7 @@ const styles = StyleSheet.create({
   },
   channelScreenSaveAreaView: {
     backgroundColor: 'white',
+    paddingTop: Platform.OS === 'android' ? 30 : 0,
   },
-  channelScreenContainer: {flexDirection: 'column', height: '98%'}
-});
+  channelScreenContainer: {flexDirection: 'column', height: '100%'}
+})

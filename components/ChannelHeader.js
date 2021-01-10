@@ -1,26 +1,22 @@
 import React from 'react';
-import {TouchableOpacity, View, Text, Image, StyleSheet} from 'react-native';
-// import iconSearch from '../images/icon-search.png';
-// import iconThreeDots from '../images/icon-3-dots.png';
+import { TouchableOpacity, View, Text, Image, StyleSheet, YellowBox } from 'react-native';
 
-export const ChannelHeader = ({navigation, channel, client}) => {
-  let channelTitle = '#channel_name';
+import iconProfile from '../../assets/profile.png'
 
-  // For normal group channel/conversation, its channel name as display title.
+function ChannelHeader({ navigation, channel, client }) {
+  let channelTitle = '#channel-name';
+
   if (channel && channel.data && channel.data.name) {
-    channelTitle = '# ' + channel.data.name.toLowerCase().replace(' ', '_');
+    channelTitle = '# ' + channel.data.name.toLowerCase().replace(' ', '-');
   }
 
-  const memberIds =
-    channel && channel.state ? Object.keys(channel.state.members) : [];
+  const memberIds = (channel && channel.state) ? Object.keys(channel.state.members) : [];
 
-  // Check if its oneOneOneConversation.
+  // Is it DM?
   if (channel && memberIds.length === 2) {
-    // If yes, then use name of other user in conversation as channel display title.
-    const otherUserId =
-      memberIds[0] === client.user.id ? memberIds[1] : memberIds[0];
+    const otherUserId = (memberIds[0] === client.user.id ? memberIds[1] : memberIds[0]);
 
-    channelTitle = channel.state.members[otherUserId].user.name;
+    channelTitle = "";
   }
 
   return (
@@ -30,34 +26,33 @@ export const ChannelHeader = ({navigation, channel, client}) => {
           onPress={() => {
             navigation.openDrawer();
           }}>
-          <Text style={styles.hamburgerIcon}>☰</Text>
+          <Text style={styles.hamburgerIcon}>☰</Text>    
         </TouchableOpacity>
-        <Text style={styles.channelTitle}>{channelTitle}</Text>
+        <Text style={styles.channelTitle}> { channelTitle } </Text>
       </View>
-      {/* Message search and menu popup are not functional here. We will cover them in some future tutorial. */}
-      {/* <View style={styles.rightContent}>
-        <TouchableOpacity style={styles.searchIconContainer}>
-          <Image source={iconSearch} style={styles.searchIcon} />
+
+      <View style={styles.rightContent}>
+        <TouchableOpacity style={styles.profileIconContainer}>
+          <Image source= { iconProfile } style={styles.profileIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.menuIconContainer}>
-          <Image source={iconThreeDots} style={styles.menuIcon} />
-        </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
-  );
-};
+  )
+}
+
 
 export const styles = StyleSheet.create({
   container: {
+    width: '100%',
     padding: 15,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: 'yellow',
     justifyContent: 'space-between',
     borderBottomWidth: 0.5,
     borderBottomColor: 'grey',
   },
   leftContent: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   hamburgerIcon: {
     fontSize: 27,
@@ -67,20 +62,16 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     fontWeight: '900',
     fontSize: 17,
-    fontFamily: 'Lato-Regular',
   },
   rightContent: {
     flexDirection: 'row',
     marginRight: 10,
   },
-  searchIconContainer: {marginRight: 15, alignSelf: 'center'},
-  searchIcon: {
+  profileIconContainer: {alignSelf: 'center'},
+  profileIcon: {
     height: 18,
     width: 18,
   },
-  menuIcon: {
-    height: 18,
-    width: 18,
-  },
-  menuIconContainer: {alignSelf: 'center'},
 });
+
+export default ChannelHeader
