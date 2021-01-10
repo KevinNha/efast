@@ -86,11 +86,18 @@ export default function ChannelNav({navigation}) {
             
             // drawerContent={ChannelListDrawer}
             // drawerStyle={styles.drawerNavigator}
-        >
-            <Drawer.Screen name="ADD New Channel" component= {Dashboard} options={{
+            options={{
                 // title: 'Home',
-                
-            }} />
+                drawerIcon: ({focused, size}) => (
+                    <Ionicons
+                    name="menu"
+                    size={size}
+                    color={focused ? '#7cc' : '#ccc'}
+                    />
+                ),
+            }}
+        >
+            <Drawer.Screen name="ADD New Channel" component= {Dashboard} />
             {
                 allChannels.map((channel) => 
                     {
