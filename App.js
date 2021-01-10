@@ -11,7 +11,7 @@ import { ChannelList } from './src/components/ChannelList/ChannelList'
 import {InputBox} from './src/components/InputBox';
 
 import ChannelListDrawer from './src/components/ChannelListDrawer';
-import { ChannelHeader } from './src/components/ChannelHeader'
+// import { ChannelHeader } from './src/components/ChannelHeader'
 
 
 import { Login, SignUp, Dashboard, Splash, Chat } from './src/container';
