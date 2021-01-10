@@ -54,18 +54,18 @@ const styles = StyleSheet.create({
     width: 40,
   },
   titleUrl: {
-    fontFamily: 'Lato-Regular',
+    // fontFamily: 'Lato-Regular',
     fontWeight: 'bold',
     padding: 2,
   },
   title: {
-    fontFamily: 'Lato-Regular',
+    // fontFamily: 'Lato-Regular',
     fontWeight: 'bold',
     color: '#1E75BE',
     padding: 2,
   },
   description: {
-    fontFamily: 'Lato-Regular',
+    // fontFamily: 'Lato-Regular',
     padding: 2,
   },
 });

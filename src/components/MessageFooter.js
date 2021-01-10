@@ -6,10 +6,10 @@ import iconEmoticon from '../../assets/iconEmoticon.png';
 export const MessageFooter = props => {
   return (
     <View style={styles.reactionListContainer}>
-      {props.message.latest_reaction &&
-        props.message.latest_reaction.length > 0 &&
+      {props.message.latest_reactions &&
+        props.message.latest_reactions.length > 0 &&
         renderReactions(
-          props.message.latest_reaction,
+          props.message.latest_reactions,
           props.supportedReactions,
           props.message.reaction_counts,
           props.handleReaction,
@@ -20,8 +20,8 @@ export const MessageFooter = props => {
           left: -70,
           top: 10,
         }}>
-        {props.message.latest_reaction &&
-          props.message.latest_reaction.length > 0 && (
+        {props.message.latest_reactions &&
+          props.message.latest_reactions.length > 0 && (
             <View style={styles.reacationPickerContainer}>
               <Image source={iconEmoticon} style={styles.reactionPickerIcon} />
             </View>
@@ -43,7 +43,7 @@ export const renderReactions = (
       if (reactions[item.type] === undefined) {
         return (reactionsByType[item.type] = [item]);
       } else {
-        return (reactionsByType[item.type] = [item] = [
+        return (reactionsByType[item.type] = [
           ...reactionsByType[item.type],
           item,
         ])
@@ -65,7 +65,7 @@ export const renderReactions = (
         />
       ) : null,
     );
-}
+};
 
 const ReactionItem = ({
   type,

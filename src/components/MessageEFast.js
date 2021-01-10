@@ -4,10 +4,10 @@ import {MessageFooter} from './MessageFooter';
 import {MessageText} from './MessageText';
 import {MessageAvatar} from './MessageAvatar';
 import {MessageHeader} from './MessageHeader';
-import {UrlPreview} from './UrlPreviews';
+import {UrlPreview} from './UrlPreview';
 import {Giphy} from './Giphy';
 
-export const MessageEFast = props => {
+export const MessageEFast = (props) => {
   if (props.message.deleted_at) {
     return null;
   }

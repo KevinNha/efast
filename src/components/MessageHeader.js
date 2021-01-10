@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Moment from 'moment';
 
-export const MessageHeader = props => {
+export const MessageHeader = (props) => {
   return (
     <View style={styles.column}>
       {props.message.attachments.length > 0 && (
@@ -25,7 +25,7 @@ export const MessageUserBar = ({groupStyles, message}) => {
       </View>
     );
   }
-  return "";
+  return null;
 };
 
 const styles = StyleSheet.create({
