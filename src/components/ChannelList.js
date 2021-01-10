@@ -26,10 +26,6 @@ function ChannelList() {
           style={styles.sectionList}
           sections={[
             {
-              title: 'Departments',
-              data: [],
-            },
-            {
               title: 'Unread',
               data: [],
             },
@@ -59,7 +55,7 @@ function ChannelList() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    paddingTop: 50,
     paddingLeft: 5,
     flexDirection: 'column',
     justifyContent: 'flex-start',

@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -8,6 +7,8 @@ import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
 import ChannelListDrawer from './src/components/ChannelListDrawer';
 import ChannelHeader from './src/components/ChannelHeader'
 
+
+const Drawer = createDrawerNavigator();
 
 function ChannelScreen({navigation, route}) {
   const [channel, setChannel] = useState(null);
@@ -32,24 +33,18 @@ function ChannelScreen({navigation, route}) {
   )
 }
 
-
-const Drawer = createDrawerNavigator();
-
 export default function App() {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <View style={styles.drawerContainer}>
-          <Drawer.Navigator
-            drawerContent={ChannelListDrawer}
-            drawerStyle={styles.drawerNavigator}>
-            <Drawer.Screen name="ChannelScreen" component={ChannelScreen} />
-          </Drawer.Navigator>
-        </View>
-      </NavigationContainer>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        <Drawer.Navigator
+          drawerContent={ChannelListDrawer}
+          drawerStyle={styles.drawerNavigator}
+        >
+          <Drawer.Screen name="ChannelScreen" component={ChannelScreen} />
+        </Drawer.Navigator>
+      </View>
+    </NavigationContainer>
   );
 }
 
@@ -60,9 +55,6 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-  drawerContainer: {
-    flex: 1,
-  },
   drawerNavigator: {
     backgroundColor: 'black',
     width: 350,
@@ -72,5 +64,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: Platform.OS === 'android' ? 30 : 0,
   },
-  channelScreenContainer: {flexDirection: 'column', height: '100%'}
-})
+  channelScreenContainer: {flexDirection: 'column', height: '100%'},
+  chatContainer: {
+    backgroundColor: 'white',
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+});
