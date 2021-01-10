@@ -2,13 +2,22 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import {StreamChat} from 'stream-chat';
 import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
+import ChannelList from './src/components/ChannelList/ChannelList'
 
-import ChannelListDrawer from './src/components/ChannelListDrawer';
+// import ChannelListDrawer from './src/components/ChannelListDrawer';
 import ChannelHeader from './src/components/ChannelHeader'
 
 
+import {
+  Chat,
+  MessageList,
+  MessageInput,
+  Channel,
+} from 'stream-chat-react-native';
+
+//channelScreen
 function ChannelScreen({navigation, route}) {
   const [channel, setChannel] = useState(null);
   useEffect(() => {
@@ -16,6 +25,8 @@ function ChannelScreen({navigation, route}) {
       navigation.openDrawer();
     }
     const channelId = route.params ? route.params.channelId : null;
+    const _channel = chatClient.channel('messaging', channelId);
+    setChannel(_channel);
     
   }, [route.params]);
 
@@ -27,12 +38,45 @@ function ChannelScreen({navigation, route}) {
           channel={channel}
           client={null}
         />
+        <View style={styles.chatContainer}>
+          <Chat client={chatClient}>
+            <Channel channel={channel}>
+              <MessageList />
+              <MessageInput />
+            </Channel>
+          </Chat>
+        </View>
       </Text>
     </SafeAreaView>
-  )
+  );
 }
 
 
+//chatClient
+const chatClient = new StreamChat('q95x9hkbyd6p');
+const userToken = 
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidmlzaGFsIn0.LpDqH6U8V8Qg9sqGjz0bMQvOfWrWKAjPKqeODYM0Elk';
+const user = {
+  id: 'vishal',
+  name: 'Vishal',
+};
+
+chatClient.setUser(user, userToken);
+
+const ChannelListDrawer = props => {
+  return (
+    <ChannelList
+      client={chatClient}
+      changeChannel={channelId => {
+        props.navigation.jumpTo('ChannelScreen', {
+          channelId,
+        });
+      }}
+    />
+  );
+};
+
+//Drawer
 const Drawer = createDrawerNavigator();
 
 export default function App() {

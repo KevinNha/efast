@@ -3,8 +3,9 @@ import { TouchableOpacity, View, Text, Image, StyleSheet, YellowBox } from 'reac
 
 import iconProfile from '../../assets/profile.png'
 
-function ChannelHeader({ navigation, channel, client }) {
+export function ChannelHeader({ navigation, channel, client }) {
   let channelTitle = '#channel-name';
+
 
   if (channel && channel.data && channel.data.name) {
     channelTitle = '# ' + channel.data.name.toLowerCase().replace(' ', '-');
@@ -16,7 +17,7 @@ function ChannelHeader({ navigation, channel, client }) {
   if (channel && memberIds.length === 2) {
     const otherUserId = (memberIds[0] === client.user.id ? memberIds[1] : memberIds[0]);
 
-    channelTitle = "";
+    channelTitle = channel.state.members[otherUserId].user.name;
   }
 
   return (
@@ -74,4 +75,3 @@ export const styles = StyleSheet.create({
   },
 });
 
-export default ChannelHeader
