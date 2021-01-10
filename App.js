@@ -10,12 +10,12 @@ import { ChannelList } from './src/components/ChannelList/ChannelList'
 import { ChannelHeader } from './src/components/ChannelHeader'
 
 
-import { Login, SignUp, Dashboard, Splash } from './src/container';
+import { Login, SignUp, Dashboard, Splash, Chat } from './src/container';
 import Loader from './src/components/Loader';
 import { StoreProvider } from './src/context/store';
 
 import {
-  Chat,
+  // Chat,
   MessageList,
   MessageInput,
   Channel,
@@ -42,12 +42,12 @@ function ChannelScreen({navigation, route}) {
           client={chatClient}
         />
         <View style={styles.chatContainer}>
-          <Chat client={chatClient}>
+          {/* <Chat client={chatClient}>
             <Channel channel={channel}>
               <MessageList />
               <MessageInput />
             </Channel>
-          </Chat>
+          </Chat> */}
         </View>
       </Text>
     </SafeAreaView>
@@ -91,11 +91,11 @@ export default function App() {
           {/* If not logged in */}
           <Stack.Navigator
             initialRouteName="Splash">
-
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="Chat" component={Chat} />
           </Stack.Navigator>
 
           {/* If logged in */}

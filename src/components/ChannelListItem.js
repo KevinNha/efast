@@ -89,7 +89,6 @@ const PresenceIndicator = ({online}) => {
 };
 
 const textStyles = {
-  fontFamily: 'Lato-Regular',
   color: 'white',
   fontSize: 18,
 };
@@ -150,7 +149,6 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
     fontSize: 15,
     fontWeight: '900',
-    fontFamily: 'Lato-Regular',
   },
 });
 
