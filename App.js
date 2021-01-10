@@ -5,6 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StreamChat } from 'stream-chat';
 import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
 import { ChannelList } from './src/components/ChannelList/ChannelList'
+import { MessageEFast } from './src/components/MessageEFast';
+import {DateSeparator} from './src/components/DateSeparator';
+import streamChatTheme from './src/components/stream-chat-theme';
+import {InputBox} from './src/components/InputBox';
 
 // import ChannelListDrawer from './src/components/ChannelListDrawer';
 import { ChannelHeader } from './src/components/ChannelHeader'
@@ -13,6 +17,8 @@ import { ChannelHeader } from './src/components/ChannelHeader'
 import { Login, SignUp, Dashboard, Splash, Chat } from './src/container';
 import Loader from './src/components/Loader';
 import { StoreProvider } from './src/context/store';
+
+import fire from './src/firebase/config';
 
 import {
   // Chat,
@@ -35,21 +41,34 @@ function ChannelScreen({navigation, route}) {
 
   return (
     <SafeAreaView style={styles.channelScreenSaveAreaView}>
-      <Text style={styles.channelScreenContainer}>
+      <View style={styles.channelScreenContainer}>
         <ChannelHeader
           navigation={navigation}
           channel={channel}
           client={chatClient}
         />
         <View style={styles.chatContainer}>
-          {/* <Chat client={chatClient}>
+          <Chat client={chatClient} style={streamChatTheme}>
             <Channel channel={channel}>
-              <MessageList />
-              <MessageInput />
+              <MessageList 
+                Input={InputBox}
+                Message={MessageEFast} 
+                DateSeparator={DateSeparator}
+              />
+              <MessageInput 
+               additionalTextInputProps={{
+                 placeholderTextColor: '#979A9A',
+                 placeholder:
+                   channel && channel.data.name
+                     ? 'Message #' +
+                       channel.data.name.toLowerCase().replace(' ', '_')
+                     : 'Message',
+               }}
+              />
             </Channel>
-          </Chat> */}
+          </Chat>
         </View>
-      </Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -66,7 +85,7 @@ const user = {
 
 chatClient.setUser(user, userToken);
 
-const ChannelListDrawer = props => {
+const ChannelListDrawer = (props) => {
   return (
     <ChannelList
       client={chatClient}
@@ -83,12 +102,20 @@ const ChannelListDrawer = props => {
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+
 export default function App() {
+  const [isLoggedIn, setIsloggedIn] = useState(false);
+fire.auth().onAuthStateChanged((user) => {
+  return user ? setIsloggedIn(true) : setIsloggedIn(false);
+});
+console.log("logged in ?", isLoggedIn);
+
+
   return (
     <StoreProvider>
     <View style={styles.container}>
       <NavigationContainer>
-          {/* If not logged in */}
+        {!isLoggedIn ? (
           <Stack.Navigator
             initialRouteName="Splash">
             <Stack.Screen name="Splash" component={Splash} />
@@ -97,15 +124,15 @@ export default function App() {
             <Stack.Screen name="Dashboard" component={Dashboard} />
             <Stack.Screen name="Chat" component={Chat} />
           </Stack.Navigator>
-
-          {/* If logged in */}
-        {/* <View style={styles.container}>
+        ) : (
+          <View style={styles.container}>
           <Drawer.Navigator
             drawerContent={ChannelListDrawer}
             drawerStyle={styles.drawerNavigator}>
             <Drawer.Screen name="ChannelScreen" component={ChannelScreen} />
           </Drawer.Navigator>
-        </View> */}
+        </View>
+        )}
       </NavigationContainer>
       {/* <Text>Open up App.js to start working on your app!</Text> */}
       {/* <StatusBar style="auto" /> */}
