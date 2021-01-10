@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -17,7 +16,6 @@ import {
   Channel,
 } from 'stream-chat-react-native';
 
-//channelScreen
 function ChannelScreen({navigation, route}) {
   const [channel, setChannel] = useState(null);
   useEffect(() => {
@@ -89,14 +87,8 @@ export default function App() {
             drawerStyle={styles.drawerNavigator}>
             <Drawer.Screen name="ChannelScreen" component={ChannelScreen} />
           </Drawer.Navigator>
-          {/* <Chat.Navigator> 
-            <Chat.Screen name="Chat" component={Chat}/>
-          </Chat.Navigator> */}
-          {/* <ChatScreen/> */}
         </View>
       </NavigationContainer>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -108,9 +100,6 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-  drawerContainer: {
-    flex: 1,
-  },
   drawerNavigator: {
     backgroundColor: 'black',
     width: 350,
@@ -120,5 +109,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: Platform.OS === 'android' ? 30 : 0,
   },
-  channelScreenContainer: {flexDirection: 'column', height: '100%'}
-})
+  channelScreenContainer: {flexDirection: 'column', height: '100%'},
+  chatContainer: {
+    backgroundColor: 'white',
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+});

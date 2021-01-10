@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, View, Text, Image, StyleSheet, YellowBox } from 'react-native';
+import { TouchableOpacity, View, Text, Image, StyleSheet, Dimensions, Platform } from 'react-native';
 
 import iconProfile from '../../assets/profile.png'
 
-export function ChannelHeader({ navigation, channel, client }) {
+export const  ChannelHeader = ({ navigation, channel, client }) => {
   let channelTitle = '#channel-name';
 
 
@@ -44,10 +44,10 @@ export function ChannelHeader({ navigation, channel, client }) {
 
 export const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: Platform.OS === 'android' ? Dimensions.get('window').width : '100%',
     padding: 15,
     flexDirection: 'row',
-    backgroundColor: 'yellow',
+    backgroundColor: 'black',
     justifyContent: 'space-between',
     borderBottomWidth: 0.5,
     borderBottomColor: 'grey',
@@ -56,11 +56,13 @@ export const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   hamburgerIcon: {
+    color: 'white',
     fontSize: 27,
   },
   channelTitle: {
-    color: 'black',
+    color: 'white',
     marginLeft: 10,
+    paddingTop: 5,
     fontWeight: '900',
     fontSize: 17,
   },
@@ -68,7 +70,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginRight: 10,
   },
-  profileIconContainer: {alignSelf: 'center'},
+  profileIconContainer: {alignSelf: 'center', backgroundColor: 'black'},
   profileIcon: {
     height: 18,
     width: 18,
