@@ -9,7 +9,7 @@ export const AddUser = async (name, email, uid) => {
             .doc(uid)
             .set({
                 name: name,
-                email, email,
+                email: email,
                 // uuid: uid,
             })
             // .then(function(docRef) {

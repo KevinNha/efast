@@ -14,14 +14,14 @@ import {InputBox} from './src/components/InputBox';
 import { ChannelHeader } from './src/components/ChannelHeader'
 
 
-import { Login, SignUp, Dashboard, Splash } from './src/container';
+import { Login, SignUp, Dashboard, Splash, Chat } from './src/container';
 import Loader from './src/components/Loader';
 import { StoreProvider } from './src/context/store';
 
 import fire from './src/firebase/config';
 
 import {
-  Chat,
+  // Chat,
   MessageList,
   MessageInput,
   Channel,
@@ -118,11 +118,11 @@ console.log("logged in ?", isLoggedIn);
         {!isLoggedIn ? (
           <Stack.Navigator
             initialRouteName="Splash">
-
             <Stack.Screen name="Splash" component={Splash} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="Chat" component={Chat} />
           </Stack.Navigator>
         ) : (
           <View style={styles.container}>

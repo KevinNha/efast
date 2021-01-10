@@ -17,7 +17,7 @@ export default function Splash({navigation}) {
                 })
                 .catch((err) => {
                     console.log(err);
-                    navigation.replace("login");
+                    navigation.replace("Login");
                 });
         }, 3000);
         return () => clearTimeout(redirect);
