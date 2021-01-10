@@ -1,9 +1,9 @@
 import React from 'react';
 import { SafeAreaView, Text} from 'react-native';
 
-import ChannelList from './ChannelList'
+import ChannelList from './ChannelList/ChannelList'
 
-function ChannelListDrawer(props) {
+export function ChannelListDrawer(props) {
   return (
     <SafeAreaView>
       <ChannelList />
@@ -11,4 +11,3 @@ function ChannelListDrawer(props) {
   )
 }
 
-export default ChannelListDrawer;

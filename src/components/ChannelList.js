@@ -55,13 +55,14 @@ function ChannelList() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 50,
     paddingLeft: 5,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     height: '100%',
   },
   headerContainer: {
-    padding: 10,
+    padding: 20,
     marginRight: 10,
   },
   inputSearchBox: {
