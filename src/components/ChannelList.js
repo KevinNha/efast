@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   sectionList: {
     flexGrow: 1,
     flexShrink: 1,
+    color: 'white'
   },
   groupTitleContainer: {
     padding: 10,
