@@ -42,7 +42,7 @@ export const  ChannelHeader = ({ navigation, channel, client }) => {
 }
 
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     width: Platform.OS === 'android' ? Dimensions.get('window').width : '100%',
     padding: 15,

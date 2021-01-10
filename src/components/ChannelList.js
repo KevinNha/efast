@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, SafeAreaView, TextInput, StyleSheet, SectionList } from 'react-native';
 
-function ChannelList() {
+export const ChannelList = () => {
 
   /**
    * The label for the channel/row
@@ -87,4 +87,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChannelList
