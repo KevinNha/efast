@@ -4,6 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { StreamChat } from 'stream-chat';
 import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
 import { ChannelList } from './src/components/ChannelList/ChannelList'
+import { MessageEFast } from './src/components/MessageEFast';
+import {DateSeparator} from './src/components/DateSeparator';
 
 // import ChannelListDrawer from './src/components/ChannelListDrawer';
 import { ChannelHeader } from './src/components/ChannelHeader'
@@ -39,7 +41,10 @@ function ChannelScreen({navigation, route}) {
         <View style={styles.chatContainer}>
           <Chat client={chatClient}>
             <Channel channel={channel}>
-              <MessageList />
+              <MessageList 
+                Message={MessageEFast} 
+                DateSeparator={DateSeparator}
+              />
               <MessageInput />
             </Channel>
           </Chat>
