@@ -1,0 +1,1 @@
+{"version":3,"sources":["connectionRecovered.js"],"names":["client","dispatchEvent","type"],"mappings":";;;;;eAAe,kBAACA,MAAD,EAAY;AACzBA,EAAAA,MAAM,CAACC,aAAP,CAAqB;AACnBC,IAAAA,IAAI,EAAE;AADa,GAArB;AAGD,C","sourcesContent":["export default (client) => {\n  client.dispatchEvent({\n    type: 'connection.recovered',\n  });\n};\n"]}
