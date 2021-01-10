@@ -48,18 +48,21 @@ export default function Dashboard({navigation}) {
             firebase
             .firestore()
             .collection("channels")
-            .get()
-            .then((querySnapshot) => {
+            .onSnapshot((querySnapshot) => {
+            // })
+            // .get()
+            // .then((querySnapshot) => {
                 let channels = [];
                 querySnapshot.forEach((doc) => {
                     if (doc.data().members) {
-                        if (doc.data().members.includes(uuid)) {
+                        // TODO - REMOVE THIS
+                        // if (doc.data().members.includes(uuid)) {
                             channels.push({
                                 id: doc.id,
                                 name: doc.data().name,
                                 members: doc.data().members,
                             })
-                        }
+                        // }
                     }
                 });
                 setAllChannels(channels);
@@ -80,7 +83,7 @@ export default function Dashboard({navigation}) {
                 keyExtractor={(_, index) => index.toString()}
                 // ListHeaderComponent={<Text>{}</Text>}
                 renderItem={({item}) => (
-                    <Text style={{marginVertical: 30}} onPress={() => onChannelPress(item.id, item.name)} >{item.id + ", " + item.name}</Text>
+                    <Text style={{marginVertical: 30}} onPress={() => onChannelPress(item.id, item.name)} >{item.name}</Text>
                 )} />
             <Button title="Add Channel" onPress={()=>handleAddChannel()} />
         </SafeAreaView>
