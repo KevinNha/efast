@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {StreamChat} from 'stream-chat';
+import { StreamChat } from 'stream-chat';
 import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
-import ChannelList from './src/components/ChannelList/ChannelList'
+import { ChannelList } from './src/components/ChannelList/ChannelList'
 
 // import ChannelListDrawer from './src/components/ChannelListDrawer';
-import ChannelHeader from './src/components/ChannelHeader'
+import { ChannelHeader } from './src/components/ChannelHeader'
 
 
 import {
@@ -34,7 +34,7 @@ function ChannelScreen({navigation, route}) {
         <ChannelHeader
           navigation={navigation}
           channel={channel}
-          client={null}
+          client={chatClient}
         />
         <View style={styles.chatContainer}>
           <Chat client={chatClient}>
@@ -79,9 +79,8 @@ const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
       <NavigationContainer>
-        <View style={styles.drawerContainer}>
+        <View style={styles.container}>
           <Drawer.Navigator
             drawerContent={ChannelListDrawer}
             drawerStyle={styles.drawerNavigator}>
@@ -89,11 +88,10 @@ export default function App() {
           </Drawer.Navigator>
         </View>
       </NavigationContainer>
-    </View>
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: '#fff',
