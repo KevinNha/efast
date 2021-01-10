@@ -14,11 +14,11 @@ import ChannelListDrawer from './src/components/ChannelListDrawer';
 // import { ChannelHeader } from './src/components/ChannelHeader'
 
 
-import { Login, SignUp, Dashboard, Splash, Chat } from './src/container';
+import { Login, SignUp, Dashboard, Splash, Chat, ChannelScreen } from './src/container';
 import Loader from './src/components/Loader';
 import { StoreProvider } from './src/context/store';
 
-import fire from './src/firebase/config';
+import firebase from './src/firebase/config';
 
 // import {
 //   // Chat,
@@ -26,53 +26,6 @@ import fire from './src/firebase/config';
 //   MessageInput,
 //   Channel,
 // } from 'stream-chat-react-native';
-
-// function ChannelScreen({navigation, route}) {
-//   const [channel, setChannel] = useState(null);
-//   useEffect(() => {
-//     if (!channel) {
-//       navigation.openDrawer();
-//     }
-//     const channelId = route.params ? route.params.channelId : null;
-//     const _channel = chatClient.channel('messaging', channelId);
-//     setChannel(_channel);
-    
-//   }, [route.params]);
-
-//   return (
-//     <SafeAreaView style={styles.channelScreenSaveAreaView}>
-//       <View style={styles.channelScreenContainer}>
-//         <ChannelHeader
-//           navigation={navigation}
-//           channel={channel}
-//           client={chatClient}
-//         />
-//         <View style={styles.chatContainer}>
-//           <Chat client={chatClient} style={streamChatTheme}>
-//             <Channel channel={channel}>
-//               <MessageList 
-//                 Input={InputBox}
-//                 Message={MessageEFast} 
-//                 DateSeparator={DateSeparator}
-//               />
-//               <MessageInput 
-//                additionalTextInputProps={{
-//                  placeholderTextColor: '#979A9A',
-//                  placeholder:
-//                    channel && channel.data.name
-//                      ? 'Message #' +
-//                        channel.data.name.toLowerCase().replace(' ', '_')
-//                      : 'Message',
-//                }}
-//               />
-//             </Channel>
-//           </Chat>
-//         </View>
-//       </View>
-//     </SafeAreaView>
-//   );
-// }
-
 
 // //chatClient
 // const chatClient = new StreamChat('q95x9hkbyd6p');
@@ -104,12 +57,10 @@ const Stack = createStackNavigator();
 
 
 export default function App() {
-  const [isLoggedIn, setIsloggedIn] = useState(true);
-// fire.auth().onAuthStateChanged((user) => {
-//   return user ? setIsloggedIn(true) : setIsloggedIn(false);
-// });
-// console.log("logged in ?", isLoggedIn);
-
+  const [isLoggedIn, setIsloggedIn] = useState(false);
+  firebase.auth().onAuthStateChanged((user) => {
+    return user ? setIsloggedIn(true) : setIsloggedIn(false);
+  });
 
   return (
     <StoreProvider>
@@ -135,9 +86,11 @@ export default function App() {
           </Stack.Navigator>
         //   <View style={styles.container}>
         //   <Drawer.Navigator
-        //     drawerContent={ChannelListDrawer}
+        //     // drawerContent={ChannelListDrawer}
         //     drawerStyle={styles.drawerNavigator}>
-        //     <Drawer.Screen name="ChannelScreen" component={ChannelScreen} />
+        //     {/* <Drawer.Screen name="ChannelScreen" component={ChannelScreen} /> */}
+        //     <Drawer.Screen name="Dashboard" component={Dashboard} />
+        //     <Drawer.Screen name="Chat" component={Chat} />
         //   </Drawer.Navigator>
         // </View>
         )}

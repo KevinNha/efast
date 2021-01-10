@@ -7,11 +7,16 @@ export const SendMessage = async (msgText, uid, channelId) => {
         let uname;
         let messages;
         await firebase.firestore().collection("users").doc(uid).get().then((doc)=>{uname = doc.data().name;});
-        await firebase.firestore().collection("channels").doc(channelId).get().then((doc)=>{messages = doc.data().messages;}).then(()=>{messages.push({
-            senderId: uid,
-            senderName: uname,
-            msg: msgText,
-        })});
+        await firebase.firestore().collection("channels").doc(channelId).get().then((doc)=>{messages = doc.data().messages;}).then(()=>{
+            if(!messages) {
+                messages = [];
+            }
+                messages.push({
+                senderId: uid,
+                senderName: uname,
+                msg: msgText,
+            })}
+            );
         // console.log(channelId);
         return await firebase
             .firestore()

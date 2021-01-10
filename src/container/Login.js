@@ -57,17 +57,11 @@ export default function Login({navigation}) {
     }
 
     return (
-        <KeyboardAvoidingView
-            keyboardVerticalOffset={-50}
-        >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
             <TextInput placeholder="Enter email" value={credentials.email} onChangeText={(text) => handleOnChangeText("email", text)} style={{marginVertical: 30, fontSize: 20}} />
             <TextInput placeholder="Enter password" value={credentials.password} onChangeText={(text) => handleOnChangeText("password", text)} secureTextEntry={true} style={{marginVertical: 30, fontSize: 20}} />
             <Button title="Login" onPress={() => handleLogin()} />
             <Text style={{alignSelf: "center", marginVertical: 20}} onPress={() => navigation.navigate('SignUp')}>Sign Up</Text>
         </View>
-        </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
     )
 }

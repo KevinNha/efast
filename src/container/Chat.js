@@ -23,24 +23,45 @@ export default function Chat({route, navigation}) {
             firebase
             .firestore()
             .collection("channels")
-            .get()
-            .then((querySnapshot) => {
+            .onSnapshot((querySnapshot) => {
                 let msgs = [];
                 querySnapshot.forEach((doc) => {
                     if (doc.id === cid) {
-                        doc.data().messages.forEach((m) => {
-                            if (m) {
-                                msgs.push({
-                                    senderId: m.senderId,
-                                    senderName: m.senderName,
-                                    msg: m.msg,
-                                })
-                            }
-                        })
+                        if (doc.data().messages){
+                            doc.data().messages.forEach((m) => {
+                                if (m) {
+                                    msgs.push({
+                                        senderId: m.senderId,
+                                        senderName: m.senderName,
+                                        msg: m.msg,
+                                    })
+                                }
+                            })
+                        }
                     }
                 });
-                setAllMessages(msgs);
+                setAllMessages(msgs.reverse());
             })
+            // .get()
+            // .then((querySnapshot) => {
+            //     let msgs = [];
+            //     querySnapshot.forEach((doc) => {
+            //         if (doc.id === cid) {
+            //             if (doc.data().messages){
+            //                 doc.data().messages.forEach((m) => {
+            //                     if (m) {
+            //                         msgs.push({
+            //                             senderId: m.senderId,
+            //                             senderName: m.senderName,
+            //                             msg: m.msg,
+            //                         })
+            //                     }
+            //                 })
+            //             }
+            //         }
+            //     });
+            //     setAllMessages(msgs.reverse());
+            // })
         } catch (error) {
             console.log(error);
         }
