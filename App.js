@@ -14,7 +14,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <View style={styles.container}>
+        <View style={styles.drawerContainer}>
           <Drawer.Navigator
             drawerContent={ChannelListDrawer}
             drawerStyle={styles.drawerNavigator}>
@@ -35,13 +35,12 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center',
   },
+  drawerContainer: {
+    flex: 1,
+  },
   drawerNavigator: {
     backgroundColor: 'black',
     width: 350,
     color: 'white',
   },
-  channelScreenSaveAreaView: {
-    backgroundColor: 'white',
-  },
-  channelScreenContainer: {flexDirection: 'column', height: '98%'}
 });

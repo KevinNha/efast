@@ -26,6 +26,10 @@ function ChannelList() {
           style={styles.sectionList}
           sections={[
             {
+              title: 'Departments',
+              data: [],
+            },
+            {
               title: 'Unread',
               data: [],
             },
@@ -55,13 +59,14 @@ function ChannelList() {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 20,
     paddingLeft: 5,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     height: '100%',
   },
   headerContainer: {
-    padding: 10,
+    padding: 20,
     marginRight: 10,
   },
   inputSearchBox: {
