@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import {StreamChat} from 'stream-chat';
+import { createStackNavigator } from '@react-navigation/stack';
+import { StreamChat } from 'stream-chat';
 import { StyleSheet, Text, SafeAreaView, View, Platform } from 'react-native';
-import {ChannelList} from './src/components/ChannelList/ChannelList'
+import { ChannelList } from './src/components/ChannelList/ChannelList'
 
 // import ChannelListDrawer from './src/components/ChannelListDrawer';
-import {ChannelHeader} from './src/components/ChannelHeader'
+import { ChannelHeader } from './src/components/ChannelHeader'
 
+
+import { Login, SignUp, Dashboard, Splash } from './src/container';
+import Loader from './src/components/Loader';
+import { StoreProvider } from './src/context/store';
 
 import {
   Chat,
@@ -34,7 +39,7 @@ function ChannelScreen({navigation, route}) {
         <ChannelHeader
           navigation={navigation}
           channel={channel}
-          client={null}
+          client={chatClient}
         />
         <View style={styles.chatContainer}>
           <Chat client={chatClient}>
@@ -76,12 +81,25 @@ const ChannelListDrawer = props => {
 
 //Drawer
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    <StoreProvider>
     <View style={styles.container}>
       <NavigationContainer>
-        <View style={styles.drawerContainer}>
+          {/* If not logged in */}
+          {/* <Stack.Navigator
+            initialRouteName="Splash">
+
+            <Stack.Screen name="Splash" component={Splash} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Dashboard" component={Dashboard} />
+          </Stack.Navigator> */}
+
+          {/* If logged in */}
+        <View style={styles.container}>
           <Drawer.Navigator
             drawerContent={ChannelListDrawer}
             drawerStyle={styles.drawerNavigator}>
@@ -89,11 +107,16 @@ export default function App() {
           </Drawer.Navigator>
         </View>
       </NavigationContainer>
+      {/* <Text>Open up App.js to start working on your app!</Text> */}
+      {/* <StatusBar style="auto" /> */}
     </View>
+    <Loader />
+    </StoreProvider>
+
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: '#fff',
